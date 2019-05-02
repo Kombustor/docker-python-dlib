@@ -2,7 +2,7 @@
 
 ## Docker Hub: [kombustor/python3-dlib](https://hub.docker.com/r/kombustor/python3-dlib)
 
-- python:3-alpine
+- python:3-alpine / python:3-stretch
 - [NumPy](https://www.numpy.org/) (dependency of dlib)
 - [dlib](http://dlib.net/)
 
