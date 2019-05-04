@@ -1,0 +1,47 @@
+version: 2
+commands:
+  build-image:
+    parameters:
+      tag:
+        type: string
+        default: "latest"
+      dir:
+        type: string
+        default: "alpine"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build -t kombustor/python3-dlib:<< parameters.tag >> ./<< parameters.dir >>/
+jobs:
+  build-latest:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    branches:
+      only:
+        - master
+    steps:
+      - build-image:
+          tag: "latest"
+          dir: "alpine"
+  build-alpine:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    branches:
+      only:
+        - master
+    steps:
+      - build-image:
+          tag: "alpine"
+          dir: "alpine"
+  build-stretch:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    branches:
+      only:
+        - master
+    steps:
+      - build-image:
+          tag: "stretch"
+          dir: "stretch"
