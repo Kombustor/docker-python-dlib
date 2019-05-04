@@ -1,6 +1,8 @@
 version: 2.1
 jobs:
   build-image:
+    environment:
+      IMAGE_NAME: kombustor/python3-dlib
     parameters:
       tag:
         type: string
@@ -15,7 +17,12 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker build -t kombustor/python3-dlib:<< parameters.tag >> ./<< parameters.dir >>/
+          command: docker build -t $IMAGE_NAME:<< parameters.tag >> ./<< parameters.dir >>/
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:<< parameters.tag >>
 workflows:
   version: 2
   build-master:
