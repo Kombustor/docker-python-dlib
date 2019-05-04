@@ -18,9 +18,6 @@ jobs:
   build-latest:
     docker:
       - image: circleci/buildpack-deps:stretch
-    branches:
-      only:
-        - master
     steps:
       - build-image:
           tag: "latest"
@@ -28,9 +25,6 @@ jobs:
   build-alpine:
     docker:
       - image: circleci/buildpack-deps:stretch
-    branches:
-      only:
-        - master
     steps:
       - build-image:
           tag: "alpine"
@@ -38,10 +32,17 @@ jobs:
   build-stretch:
     docker:
       - image: circleci/buildpack-deps:stretch
-    branches:
-      only:
-        - master
     steps:
       - build-image:
           tag: "stretch"
           dir: "stretch"
+workflows:
+  version: 2
+  build-master:
+    branches:
+      only:
+        - master
+    jobs:
+      - build-latest
+      - build-alpine
+      - build-stretch
