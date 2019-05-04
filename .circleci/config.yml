@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build-latest:
+  build-image:
     parameters:
       tag:
         type: string
@@ -20,19 +20,19 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build-latest:
+      - build-image:
           filters:
             branches:
               only: master
           tag: latest
           dir: alpine
-      - build-alpine:
+      - build-image:
           filters:
             branches:
               only: master
           tag: alpine
           dir: alpine
-      - build-stretch:
+      - build-image:
           filters:
             branches:
               only: master
