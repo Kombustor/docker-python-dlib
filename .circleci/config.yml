@@ -6,16 +6,16 @@ workflows:
     jobs:
       - docker/publish:
           name: "publish-latest"
-          path: ./alpine/
+          dockerfile: ./alpine/Dockerfile
           image: kombustor/python3-dlib
           tag: latest
       - docker/publish:
           name: "publish-alpine"
-          path: ./alpine/
+          dockerfile: ./alpine/Dockerfile
           image: kombustor/python3-dlib
           tag: alpine
       - docker/publish:
           name: "publish-stretch"
-          path: ./stretch/
+          dockerfile: ./stretch/Dockerfile
           image: kombustor/python3-dlib
           tag: stretch
