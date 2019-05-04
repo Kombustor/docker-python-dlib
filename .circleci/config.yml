@@ -28,18 +28,21 @@ workflows:
   build-master:
     jobs:
       - build-image:
+          name: "build-latest"
           filters:
             branches:
               only: master
           tag: latest
           dir: alpine
       - build-image:
+          name: "build-alpine"
           filters:
             branches:
               only: master
           tag: alpine
           dir: alpine
       - build-image:
+          name: "build-stretch"
           filters:
             branches:
               only: master
